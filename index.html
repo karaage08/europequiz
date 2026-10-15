@@ -51,19 +51,43 @@ color:#666;
 }
 
 .modeArea{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
 margin:30px 0;
 }
 
 .modeArea label{
 display:flex;
+flex-direction:column;
+justify-content:center;
 align-items:center;
-gap:10px;
+text-align:center;
+
 background:#f5f5f5;
+
 padding:15px;
-margin-bottom:10px;
+
 border-radius:12px;
-font-size:1.1rem;
+
+font-size:1rem;
+
+font-weight:bold;
+
+cursor:pointer;
+
+min-height:90px;
 }
+
+.modeArea input[type="radio"]{
+display:none;
+}
+
+.modeArea label:has(input:checked){
+background:#2b7de9;
+color:white;
+}
+
 
 .startBtn{
 width:100%;
@@ -279,7 +303,10 @@ type="radio"
 name="mode"
 value="country_random"
 checked>
-🌍 国名ランダム10問
+
+🌍<br>
+国名10問
+
 </label>
 
 <label>
@@ -287,7 +314,10 @@ checked>
 type="radio"
 name="mode"
 value="country_all">
-🏆 国名全18問
+
+🏆<br>
+国名全18問
+
 </label>
 
 <label>
@@ -295,7 +325,10 @@ value="country_all">
 type="radio"
 name="mode"
 value="geo_random">
-🗻 自然地理ランダム10問
+
+🗻<br>
+自然地理10問
+
 </label>
 
 <label>
@@ -303,7 +336,10 @@ value="geo_random">
 type="radio"
 name="mode"
 value="geo_all">
-👑 自然地理全12問
+
+👑<br>
+自然地理全12問
+
 </label>
 
 </div>
@@ -584,17 +620,15 @@ localStorage.getItem(m[1])
 if(data){
 
 html += `
-${m[0]}<br>
-正答率 ${data.rate}%<br>
-${data.time}秒
-<br><br>
+${m[0]}：正答率 ${data.rate}% 　タイム：${data.time}秒
+<br>
 `;
 
 }else{
 
 html += `
 ${m[0]}：未プレイ
-<br><br>
+<br>
 `;
 
 }
@@ -1077,19 +1111,18 @@ homeBtn.onclick = ()=>{
 
 showTitleBest();
 
-resultScreen.classList.remove(
-"active"
-);
+/* 全画面を一旦閉じる */
 
-gameScreen.classList.remove(
-"active"
-);
+startScreen.classList.remove("active");
+gameScreen.classList.remove("active");
+resultScreen.classList.remove("active");
 
-startScreen.classList.add(
-"active"
-);
+/* タイトルだけ開く */
+
+startScreen.classList.add("active");
 
 };
+
 
 showTitleBest();
 
